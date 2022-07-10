@@ -26,9 +26,15 @@ The analysis of the election show that:
   - Raymon Anthony Doane received 3.1% of the vote, and 11,606 number of the votes.
 - The winner of the election was:
   - Diana DeGette who received 73.8% of the vote, and 272,892 number of the votes.
+- The County results were:
+  - Jefferson: received 10.5% of the vote, for a total of 38,855 votes.
+  - Denver: received 82.8% of the vote, for a total of 306,055 votes.
+  - Arapahoe: received 6.7% of the vote, for a total of 24,801 votes.
+- The county with the highest turnout was:
+  - Denver with 82.8% of the total vote, for a total of 306,055 votes
   
 ## Challenge Overview
-Using excel open the .csv to examine data and get the total ballots, then using python in Visual Studio Code, import a .csv and iterate through it to gather unique candidate names in a list, creating a dictionary with the candidate names, count the vote of each candidate and calculate the percentage of votes using the total votes cast in the election. After that was all working properly, stored the highest votes and the candidate associated with it in a variable using a if and statement. Lastly, write the variables of the analysis into the election_analysis.txt
+Using excel open the .csv to examine data and get the total ballots, then using python in Visual Studio Code, import a .csv and iterate through it to gather unique candidate names in a list, creating a dictionary with the candidate names, count the vote of each candidate and calculate the percentage of votes using the total votes cast in the election. After that was all working properly, stored the highest votes and the candidate associated with it in a variable using a if and statement. Lastly, write the variables of the analysis into the election_analysis.txt. Using a similar process to calculate the county turnouts. It would have been interesting to analyze the data further to see if a candidate that did not win the election was more popular in other counties rather then seeing the overall popular vote winner accross the 3 different counties.
 
 ## Challenge Summary
 - https://docs.python.org/3.7/library/functions.html#round -  used python documentation to round the percentage of votes to 1 decimal place.
