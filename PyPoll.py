@@ -4,6 +4,11 @@
 # 3. The percentage of votes each candidate won
 # 4. The total number of votes each candidate won
 # 5. The winner of the election based on popular vote.
+# 6. Calculate the voter turnout for each county
+# 7. Calculate the percentage of votes from each county out of the total count.
+# 8. The county with the highest turnout
+
+
 
 # Add our dependencies
 
@@ -34,7 +39,17 @@ winning_count = 0
 
 winning_percentage = 0
 
+county_options = []
 
+county_turnout = {}
+
+county_turnout_percentage = 0
+
+highest_county_turnout_name = ""
+
+highest_county_turnout_count = 0
+
+highest_county_turnout_percentage = 0
 
 with open(file_to_load) as election_data:
 
@@ -59,9 +74,10 @@ with open(file_to_load) as election_data:
 
         total_votes += 1
 
-        # print the candidate name from each row
+        # print the candidate name from each row and county name
 
         candidate_name = row[2]
+        county_name = row[1]
        
 
         # if candidate does not match any existing candidate...
@@ -76,6 +92,20 @@ with open(file_to_load) as election_data:
             candidate_votes[candidate_name] = 0
             
         candidate_votes[candidate_name] += 1
+
+
+
+        # if county does not match any existing county...
+
+        if county_name not in county_options:
+
+            # add it to the list of counties
+            county_options.append(county_name)
+
+            # begin tracking counties vote count
+            county_turnout[county_name] = 0
+
+        county_turnout[county_name] += 1
 
 
 # save the results to our text file
@@ -105,7 +135,7 @@ with open(file_to_save, "w") as txt_file:
         
     print(total_votes)  
         
-    # determine the percentage of votes for each candidate by looping through counts 
+    # determine the percentage of votes for each candidate and each county by looping through counts 
         
     # 1. iterate through the candidate list. 
         
@@ -128,6 +158,7 @@ with open(file_to_save, "w") as txt_file:
             txt_file.write(candidate_results)
 
         
+        # calculate winning candidate
             if (votes > winning_count) and (vote_percentage > winning_percentage):  
                 
                 winning_count = votes   
@@ -147,22 +178,67 @@ with open(file_to_save, "w") as txt_file:
     print(winning_candidate_summary)   
         
     txt_file.write(winning_candidate_summary)
+    
+    
+    # Calculate county results
+    for county_name in county_turnout:    
         
+        # retrieve vote count of a county  
         
+        votes = county_turnout[county_name]
+
+
+ # 3. calculate the percentage of votes. 
+        
+        county_turnout_percentage = float(votes) / float(total_votes) * 100   
+        
+        # 4. print the candidate name and percentage of votes and save it to a text file    
+        
+        county_results = (f"\n{county_name}: received {round(county_turnout_percentage, 1)}% of the vote, for a total of {votes:,} votes.\n")  
+        
+
+        print(county_results)
+
+        txt_file.write(county_results)
+           
         
 
 
 
+  # calculate winning candidate
+        if (votes > highest_county_turnout_count) and (county_turnout_percentage > highest_county_turnout_percentage):  
+                
+            highest_county_turnout_count = votes   
+            highest_county_turnout_percentage = county_turnout_percentage    
+        
+            highest_county_turnout_name = county_name 
+        
+    highest_county_summary = (   
+        f"\n-------------------------\n"  
+        f"County with most turnout: {highest_county_turnout_name}\n"    
+        f"Highest County turnout vote count: {highest_county_turnout_count:,}\n"  
+        f"Highest County turnout Percentage of total vote: {highest_county_turnout_percentage:.1f}%\n"  
+        f"-------------------------\n") 
+        
+
+    txt_file.write(highest_county_summary)
+    print(highest_county_summary)   
+        
+
+
+# Calculate the voter turnout for each county
+# Calculate the percentage of votes from each county out of the total count
+# Calculate the county with the highest turnout    
+        
+ 
+
+print(county_options)
+
+
+print(county_turnout)
 
 
 
-
-
-
-
-
-
-
-
+ 
 
 
